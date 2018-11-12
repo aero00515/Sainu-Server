@@ -6,8 +6,9 @@ module.exports = (io, store) => {
     // TODO: get data from db
     store.sainuers[socket.id] = {};
     // TODO: if exist, send back to user and redirect page
+    // socket.emit('name', name);
 
-    socket.on('setName', function(name) {
+    socket.on('setSaiNuer', function(name) {
       store.sainuers[socket.id] = _.extend(
         store.sainuers[socket.id],
         {
@@ -15,10 +16,11 @@ module.exports = (io, store) => {
         },
         {}
       );
+      socket.emit('setSaiNuer', name);
+      console.log(name, store.sainuers[socket.id]);
     });
 
     socket.on('tweet', function(tweet) {
-      console.log(tweet, store.sainuers[socket.id]);
       store.sainuers[socket.id] = _.extend(
         store.sainuers[socket.id],
         {
@@ -26,7 +28,9 @@ module.exports = (io, store) => {
         },
         {}
       );
+      // Broadcast
       io.emit('tweet', tweet);
+      console.log(tweet, store.sainuers[socket.id]);
     });
 
     socket.on('disconnect', () => {
