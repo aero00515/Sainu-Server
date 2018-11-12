@@ -1,4 +1,5 @@
-import * as devConfig from './dev.conf.json';
-import * as prodConfig from './prod.conf.json';
+const devConfig = require('./dev.conf.json');
+const prodConfig = require('./prod.conf.json');
 
-export default process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+module.exports = config;
