@@ -20,17 +20,23 @@ module.exports = (io, store) => {
       console.log(name, store.senuers[socket.id]);
     });
 
-    socket.on('tweet', function(tweet) {
+    socket.on('aware', function(aware) {
       store.senuers[socket.id] = _.extend(
         store.senuers[socket.id],
         {
-          lastMessage: tweet
+          lastMessage: aware
         },
         {}
       );
+      store.events.push({
+        senuerId: socket.id,
+        senuer: store.senuers[socket.id].name,
+        createdAt: Date.now(),
+        aware
+      });
       // Broadcast
-      io.emit('tweet', tweet);
-      console.log(tweet, store.senuers[socket.id]);
+      io.emit('aware', aware);
+      console.log(socket.id, store.senuers, store.events);
     });
 
     socket.on('disconnect', () => {
