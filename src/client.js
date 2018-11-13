@@ -4,25 +4,25 @@ module.exports = (io, store) => {
   io.on('connection', function(socket) {
     console.log('a user connected', socket.id);
     // TODO: get data from db
-    store.sainuers[socket.id] = {};
+    store.senuers[socket.id] = {};
     // TODO: if exist, send back to user and redirect page
     // socket.emit('name', name);
 
-    socket.on('setSaiNuer', function(name) {
-      store.sainuers[socket.id] = _.extend(
-        store.sainuers[socket.id],
+    socket.on('setSenuer', function(name) {
+      store.senuers[socket.id] = _.extend(
+        store.senuers[socket.id],
         {
           name
         },
         {}
       );
-      socket.emit('setSaiNuer', name);
-      console.log(name, store.sainuers[socket.id]);
+      socket.emit('setSenuer', name);
+      console.log(name, store.senuers[socket.id]);
     });
 
     socket.on('tweet', function(tweet) {
-      store.sainuers[socket.id] = _.extend(
-        store.sainuers[socket.id],
+      store.senuers[socket.id] = _.extend(
+        store.senuers[socket.id],
         {
           lastMessage: tweet
         },
@@ -30,7 +30,7 @@ module.exports = (io, store) => {
       );
       // Broadcast
       io.emit('tweet', tweet);
-      console.log(tweet, store.sainuers[socket.id]);
+      console.log(tweet, store.senuers[socket.id]);
     });
 
     socket.on('disconnect', () => {

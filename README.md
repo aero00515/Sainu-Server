@@ -1,6 +1,6 @@
-# SaiNu
+# Senu
 
-> A Project of 91 SaiNu
+> A Project of 91 Senu
 
 #### Build Setup
 
